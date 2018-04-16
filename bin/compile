@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+# Fail fast
+set -e
+
+# Debug
+# set -x
+
+# Print
+function print() {
+  echo "-----> $*"
+}
+
+# Parse and derive params
+BUILD_DIR=$1
+FONTS_DIR="$(dirname $0)/../fonts"
+
+# Installing fonts
+print "Installing fonts"
+mkdir -p $BUILD_DIR/.fonts
+cp $FONTS_DIR/* $BUILD_DIR/.fonts/
+fc-cache -f $BUILD_DIR/.fonts
